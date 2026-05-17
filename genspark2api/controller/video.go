@@ -319,6 +319,9 @@ func createVideoRequestBody(c *gin.Context, cookie string, openAIReq *model.Vide
 		// 设置请求头
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("Cookie", cookie)
+		if config.RecaptchaProxySecret != "" {
+			req.Header.Set("X-Recaptcha-Proxy-Secret", config.RecaptchaProxySecret)
+		}
 
 		// 发送请求
 		resp, err := client.Do(req)

@@ -408,6 +408,11 @@ app.get('/', async (c) => {
 });
 // Modified /genspark route with caching for better performance
 app.get('/genspark', async (c) => {
+    const expectedSecret = process.env.RECAPTCHA_PROXY_SECRET || '';
+    if (expectedSecret && c.req.header('x-recaptcha-proxy-secret') !== expectedSecret) {
+        return c.json({ code: 401, message: 'Unauthorized' }, 401);
+    }
+
     // Get proxy URL from environment variable or request query
     const proxyUrl = process.env.PROXY_URL || c.req.query('proxy');
     const headers = Object.fromEntries(c.req.raw.headers);

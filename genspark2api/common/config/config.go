@@ -28,6 +28,7 @@ var YesCaptchaClientKey = env.String("YES_CAPTCHA_CLIENT_KEY", "")
 
 // var CheatUrl = env.String("CHEAT_URL", "https://gs-cheat.aytsao.cn/genspark/create/req/body")
 var RecaptchaProxyUrl = recaptchaProxyURL()
+var RecaptchaProxySecret = os.Getenv("RECAPTCHA_PROXY_SECRET")
 
 // 隐藏思考过程
 var ReasoningHide = env.Int("REASONING_HIDE", 0)
