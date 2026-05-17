@@ -1,0 +1,12 @@
+.DS_Store
+.env
+.env.*
+genspark2api/.env
+genspark2api/.env.*
+genspark2api/data/
+genspark-playwright-proxy-data/
+tmp-proxy/
+test_results/
+*.log
+*.pid
+

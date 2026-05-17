@@ -1,0 +1,13 @@
+services:
+  genspark-playwright-proxy:
+    build: .
+    image: genspark-playwright-proxy-local:latest
+    container_name: genspark-playwright-proxy
+    restart: unless-stopped
+    ports:
+      - "${GENSPARK_PROXY_PORT:-7022}:7022"
+    volumes:
+      - ../genspark-playwright-proxy-data:/app/genspark-playwright-proxy/data
+    environment:
+      - TZ=${TZ:-Asia/Taipei}
+      - PROXY_URL=${PROXY_URL:-}

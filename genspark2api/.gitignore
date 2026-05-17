@@ -1,0 +1,10 @@
+.idea
+.vscode
+upload
+*.exe
+*.db
+build
+.env
+.env.*
+data/*.log
+data/*.pid

@@ -1,0 +1,46 @@
+services:
+  - type: pserv
+    runtime: docker
+    name: genspark-playwright-proxy
+    plan: starter
+    region: singapore
+    dockerfilePath: ./genspark-playwright-proxy-custom/Dockerfile
+    dockerContext: ./genspark-playwright-proxy-custom
+    autoDeployTrigger: commit
+    envVars:
+      - key: PORT
+        value: 7022
+      - key: TZ
+        value: Asia/Taipei
+      - key: PROXY_URL
+        value: ""
+
+  - type: web
+    runtime: docker
+    name: genspark2api
+    plan: starter
+    region: singapore
+    dockerfilePath: ./genspark2api/Dockerfile
+    dockerContext: ./genspark2api
+    autoDeployTrigger: commit
+    healthCheckPath: /
+    envVars:
+      - key: BIND_HOST
+        value: 0.0.0.0
+      - key: TZ
+        value: Asia/Taipei
+      - key: DEBUG
+        value: "false"
+      - key: AUTO_MODEL_CHAT_MAP_TYPE
+        value: "1"
+      - key: RECAPTCHA_PROXY_HOSTPORT
+        fromService:
+          name: genspark-playwright-proxy
+          type: pserv
+          property: hostport
+      - key: GS_COOKIE
+        sync: false
+      - key: API_SECRET
+        sync: false
+      - key: MODEL_CHAT_MAP
+        value: ""

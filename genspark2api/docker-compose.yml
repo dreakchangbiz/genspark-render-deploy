@@ -1,0 +1,21 @@
+services:
+  genspark2api:
+    build: .
+    image: genspark2api-local:latest
+    container_name: genspark2api
+    restart: unless-stopped
+    ports:
+      - "${GENSPARK2API_PORT:-7055}:7055"
+    volumes:
+      - ./data:/app/genspark2api/data
+    environment:
+      - GS_COOKIE=${GS_COOKIE:-}
+      - API_SECRET=${API_SECRET:-}
+      - TZ=${TZ:-Asia/Taipei}
+      - PORT=7055
+      - BIND_HOST=0.0.0.0
+      - DEBUG=${DEBUG:-false}
+      - AUTO_MODEL_CHAT_MAP_TYPE=${AUTO_MODEL_CHAT_MAP_TYPE:-1}
+      - MODEL_CHAT_MAP=${MODEL_CHAT_MAP:-}
+      - PRE_MESSAGES_JSON=${PRE_MESSAGES_JSON:-}
+      - ROUTE_PREFIX=${ROUTE_PREFIX:-}
