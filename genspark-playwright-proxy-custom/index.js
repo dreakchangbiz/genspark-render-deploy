@@ -406,6 +406,7 @@ app.get('/', async (c) => {
         return c.text('Unable to load homepage', 500);
     }
 });
+app.get('/healthz', (c) => c.json({ ok: true }));
 // Modified /genspark route with caching for better performance
 app.get('/genspark', async (c) => {
     const expectedSecret = process.env.RECAPTCHA_PROXY_SECRET || '';
